@@ -1,0 +1,6 @@
+pytest>=8.0
+pytest-html>=4.0
+requests>=2.31
+selenium>=4.14
+pywinauto>=0.6.9
+Appium-Python-Client>=2.10
