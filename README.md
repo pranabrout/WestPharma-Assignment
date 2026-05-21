@@ -1,48 +1,53 @@
-# TypeScript Hello World
+Automation Assignment
+This folder contains Python automation scripts for the provided assignment scenarios.
 
-A simple Hello World project built with TypeScript and Node.js.
+Folder Structure
+automation/requirements.txt - Python dependency list
+automation/web_test.py - Web application automation for Automation Exercise
+automation/notepad_test.py - Windows Notepad automation using pywinauto
+automation/mobile_test.py - Mobile Calculator automation using Appium
+automation/api_test.py - API automation for Reqres.in
+automation/run_all.py - Consolidated runner for all scenarios
+automation/utils.py - Shared helper functions
+Setup
+Open a terminal in the workspace root: c:\Users\prana\VSCode Projects
 
-## Project Structure
+Install dependencies:
 
-```
-.
-├── src/
-│   └── index.ts      # Main TypeScript source file
-├── dist/             # Compiled JavaScript output
-├── package.json      # Project dependencies and scripts
-├── tsconfig.json     # TypeScript compiler configuration
-└── README.md         # Project documentation
-```
+"C:/Program Files/Python314/python.exe" -m pip install -r automation/requirements.txt
+Optional: create a Python virtual environment and install dependencies there.
 
-## Getting Started
+Execution
+Run all tests with pytest
+"C:/Program Files/Python314/python.exe" -m pytest automation --html=automation/report.html
+Run all tests with the consolidated runner
+"C:/Program Files/Python314/python.exe" automation/run_all.py
+Run the consolidated runner with optional scenarios
+Enable web tests: RUN_WEB=1 python automation/run_all.py
+Enable Notepad tests: RUN_NOTEPAD=1 python automation/run_all.py
+Enable mobile tests: RUN_MOBILE=1 python automation/run_all.py
+Enable Reqres write tests: REQRES_RUN_WRITE=1 python automation/run_all.py
+You can combine options:
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-2. Build the project:
-   ```bash
-   npm run build
-   ```
-
-3. Run the project:
-   ```bash
-   npm start
-   ```
-
-4. Or both build and run together:
-   ```bash
-   npm run dev
-   ```
-
-## Scripts
-
-- `npm run build` - Compile TypeScript to JavaScript
-- `npm start` - Run the compiled JavaScript
-- `npm run dev` - Build and run the project
-
-## Technologies
-
-- TypeScript 5.0+
-- Node.js
+RUN_WEB=1 RUN_NOTEPAD=1 REQRES_RUN_WRITE=1 python automation/run_all.py
+Run a single scenario
+Web: python -m pytest automation/web_test.py -q
+Notepad: python -m pytest automation/notepad_test.py -q
+Mobile: python -m pytest automation/mobile_test.py -q
+API: python -m pytest automation/api_test.py -q
+Environment variables
+RUN_WEB=1 enables automation/web_test.py in automation/run_all.py
+RUN_NOTEPAD=1 enables automation/notepad_test.py in automation/run_all.py
+RUN_MOBILE=1 enables automation/mobile_test.py in automation/run_all.py
+REQRES_RUN_WRITE=1 enables write-mode API tests for automation/api_test.py
+Notes
+automation/mobile_test.py expects Appium server available at http://127.0.0.1:4723/wd/hub.
+automation/api_test.py reads REQRES_API_KEY from the environment because reqres.in now requires an API key for POST/PUT/DELETE operations.
+The Notepad script uses pywinauto and will only run on Windows.
+Todo
+ Document environment variables used by automation/run_all.py
+ Validate automation/notepad_test.py with RUN_NOTEPAD=1
+ Validate automation/mobile_test.py with RUN_MOBILE=1
+ Add Appium setup details if mobile automation is enabled
+Reporting
+Use pytest --html=report.html to generate an HTML execution report. The generated report will be written to the working directory.
